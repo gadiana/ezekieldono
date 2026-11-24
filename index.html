@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="sora" data-scheme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jhon Ezekiel B. Gadiana — Backend Programmer</title>
+  <meta name="description" content="Portfolio of Jhon Ezekiel B. Gadiana, backend programmer (Python, PHP, JavaScript, Django, React Native, Flutter)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=M+PLUS+Rounded+1c:wght@400;700;800&family=Noto+Sans+JP:wght@700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script>
+    // Apply saved theme before paint (no flash)
+    (function () {
+      var t = localStorage.getItem("jeg-theme");
+      if (!t) t = "sora"; // default theme
+      document.documentElement.setAttribute("data-theme", t);
+      document.documentElement.setAttribute("data-scheme", /sakura|sora/.test(t) ? "light" : "dark");
+    })();
+  </script>
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="preloader" aria-hidden="true">
+    <div class="pre-kanji">起動</div>
+    <div class="pre-bar"><span></span></div>
+    <div class="pre-text">LOADING EPISODE 01…</div>
+  </div>
+
+  <!-- Animated background -->
+  <div class="sky" aria-hidden="true"></div>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <a href="#home" class="logo"><span class="logo-jp">ジョン</span><span class="logo-en">JEG<b>.</b></span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home" data-jp="ホーム">Home</a>
+      <a href="#about" data-jp="自己紹介">About</a>
+      <a href="#skills" data-jp="スキル">Skills</a>
+      <a href="#projects" data-jp="作品">Projects</a>
+      <a href="#contact" data-jp="連絡">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="theme-picker">
+        <button class="icon-btn" id="themeBtn" aria-haspopup="true" aria-expanded="false" title="Change theme">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 3a9 9 0 0 0 0 18c1 0 1.7-.8 1.7-1.7 0-.4-.2-.8-.4-1.1-.3-.3-.4-.7-.4-1.1 0-.9.8-1.7 1.7-1.7h2A5.4 5.4 0 0 0 22 11.6C22 6.8 17.5 3 12 3zM6.5 12a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
+        </button>
+        <div class="theme-menu" id="themeMenu" role="menu">
+          <p class="menu-label">Dark</p>
+          <button role="menuitem" data-set-theme="tokyo-night"><i style="--c1:#0b0f2a;--c2:#ff4fd8"></i>Tokyo Night <small>星</small></button>
+          <button role="menuitem" data-set-theme="akatsuki"><i style="--c1:#140707;--c2:#ff3b3b"></i>Akatsuki <small>暁</small></button>
+          <p class="menu-label">Light</p>
+          <button role="menuitem" data-set-theme="sakura"><i style="--c1:#fff0f5;--c2:#ff6fa8"></i>Sakura <small>桜</small></button>
+          <button role="menuitem" data-set-theme="sora"><i style="--c1:#e8f6ff;--c2:#3aa0ff"></i>Sora Sky <small>空</small></button>
+        </div>
+      </div>
+      <button class="icon-btn" id="introBtn" title="Replay anime intro" aria-label="Replay anime intro">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+      </button>
+      <button class="icon-btn mode-toggle" id="modeToggle" title="Toggle light / dark">
+        <svg class="sun" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg>
+        <svg class="moon" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M21 14.5A9 9 0 0 1 9.5 3a9 9 0 1 0 11.5 11.5z"/></svg>
+      </button>
+      <button class="icon-btn burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero-text">
+        <p class="eyebrow reveal">こんにちは！ <span>Hello, world — I'm</span></p>
+        <h1 class="hero-name reveal" data-text="Jhon Ezekiel">
+          <span class="glitch" data-text="Jhon Ezekiel">Jhon Ezekiel</span>
+          <span class="surname">B. Gadiana</span>
+        </h1>
+        <p class="hero-jp reveal">ジョン・エゼキエル・ガディアナ</p>
+        <p class="hero-role reveal">&gt; <span id="typer"></span><span class="caret">_</span></p>
+        <p class="hero-tag reveal" id="heroTag"></p>
+        <div class="hero-cta reveal">
+          <a href="#projects" class="btn btn-primary"><span>View Projects</span></a>
+          <button class="btn btn-ghost" data-open-chat><span>Ask my AI secretary</span></button>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="emblem">
+          <div class="ring r1"></div>
+          <div class="ring r2"></div>
+          <div class="ring r3"></div>
+          <div class="emblem-core">
+            <span class="emblem-kanji">裏</span>
+            <span class="emblem-sub">BACKEND</span>
+          </div>
+          <span class="orbit o1">PY</span>
+          <span class="orbit o2">PHP</span>
+          <span class="orbit o3">JS</span>
+        </div>
+        <div class="speech-bubble">「サーバーは任せて！」<small>Leave the server to me!</small></div>
+      </div>
+      <a href="#about" class="scroll-hint" aria-label="Scroll down"><span></span></a>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="section-head reveal">
+        <span class="ep">EPISODE 01</span>
+        <h2>About Me <span class="jp">自己紹介</span></h2>
+      </div>
+      <div class="about-grid">
+        <div class="card about-card reveal" id="aboutText"></div>
+        <div class="card stat-card reveal">
+          <h3>Character Profile</h3>
+          <dl class="profile-list">
+            <div><dt>Name</dt><dd id="pfName"></dd></div>
+            <div><dt>Class</dt><dd>Backend Programmer</dd></div>
+            <div><dt>Main weapon</dt><dd>Python + Django</dd></div>
+            <div><dt>Side skills</dt><dd>PHP, JavaScript, Mobile</dd></div>
+            <div><dt>Hobby</dt><dd>Anime 🍥</dd></div>
+          </dl>
+          <h4>Special Abilities</h4>
+          <ul class="ability-list" id="strengths"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <div class="section-head reveal">
+        <span class="ep">EPISODE 02</span>
+        <h2>Power Levels <span class="jp">スキル</span></h2>
+      </div>
+      <div class="skills-grid">
+        <div class="card reveal">
+          <h3><span class="tag">言語</span> Languages</h3>
+          <div class="bars" id="langBars"></div>
+        </div>
+        <div class="card reveal">
+          <h3><span class="tag">技</span> Frameworks</h3>
+          <div class="bars" id="fwBars"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <div class="section-head reveal">
+        <span class="ep">EPISODE 03</span>
+        <h2>Project Arcs <span class="jp">作品</span></h2>
+      </div>
+      <div class="filters reveal" id="filters">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="backend">Backend</button>
+        <button class="chip" data-filter="web">Web</button>
+        <button class="chip" data-filter="mobile">Mobile</button>
+      </div>
+      <div class="project-grid" id="projectGrid"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="section-head reveal">
+        <span class="ep">FINAL EPISODE</span>
+        <h2>Let's Team Up <span class="jp">連絡</span></h2>
+      </div>
+      <div class="contact-wrap card reveal">
+        <p class="contact-lead">Need a backend built, an API fixed, or a mobile app connected? Send a message — or just ask my AI secretary.</p>
+        <div class="contact-links">
+          <a id="mailLink" class="contact-item">
+            <span class="ci-icon">✉</span><span><small>Gmail</small><b id="mailText"></b></span>
+          </a>
+          <a id="phoneLink" class="contact-item">
+            <span class="ci-icon">☎</span><span><small>Phone</small><b id="phoneText"></b></span>
+          </a>
+          <button class="contact-item copy" id="copyEmail">
+            <span class="ci-icon">⧉</span><span><small>Quick</small><b>Copy email</b></span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Jhon Ezekiel B. Gadiana · <span class="jp">つづく…</span> (to be continued) · <button class="link-btn" id="introBtn2">▶ Replay opening</button></p>
+  </footer>
+
+  <!-- ===================== AI SECRETARY ===================== -->
+  <button class="chat-fab" id="chatFab" data-open-chat aria-label="Open AI secretary">
+    <span class="fab-face">秘</span>
+    <span class="fab-ping"></span>
+  </button>
+
+  <aside class="chat" id="chat" aria-hidden="true" aria-label="AI secretary chat">
+    <div class="chat-head">
+      <div class="avatar" id="avatar">
+        <div class="av-ring"></div>
+        <div class="av-face"><span class="eye l"></span><span class="eye r"></span><span class="mouth"></span></div>
+      </div>
+      <div class="chat-title">
+        <b>Aiko <small>愛子</small></b>
+        <span id="chatStatus">Jhon's AI secretary · online</span>
+      </div>
+      <button class="icon-btn" id="voiceModeBtn" title="Voice conversation mode" aria-pressed="false">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M3 10v4h4l5 5V5L7 10H3zm13.5 2A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>
+      </button>
+      <button class="icon-btn" id="chatClose" title="Close">✕</button>
+    </div>
+
+    <div class="voice-stage" id="voiceStage" hidden>
+      <div class="orb" id="orb"><span></span><span></span><span></span></div>
+      <p id="voiceHint">Tap the mic and ask me anything about Jhon.</p>
+      <p class="voice-heard" id="voiceHeard"></p>
+      <div class="silence-bar" id="silenceBar" title="Aiko answers when this fills (2 seconds of silence)"><i></i></div>
+    </div>
+
+    <div class="chat-body" id="chatBody" role="log" aria-live="polite"></div>
+
+    <div class="chat-suggest" id="chatSuggest"></div>
+
+    <form class="chat-input" id="chatForm">
+      <button type="button" class="icon-btn mic" id="micBtn" title="Speak">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-3.1A7 7 0 0 0 19 11h-2z"/></svg>
+      </button>
+      <input id="chatInput" type="text" placeholder="Ask about skills, projects, contact…" autocomplete="off" />
+      <button type="submit" class="icon-btn send" title="Send">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+      </button>
+    </form>
+  </aside>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/background.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/brain.js"></script>
+  <script src="js/intro.js"></script>
+  <script src="js/assistant.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

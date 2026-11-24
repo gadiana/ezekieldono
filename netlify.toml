@@ -1,0 +1,17 @@
+# Netlify settings — static site, no build step needed
+[build]
+  publish = "."
+
+# The Python server is for running locally; don't serve its source on the web
+[[redirects]]
+  from = "/server/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "microphone=(self)"
