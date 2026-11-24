@@ -164,7 +164,7 @@ html[data-scheme="light"] .mode-toggle .moon { display: block; }
 .theme-menu button small { margin-left: auto; font-family: var(--font-jp); color: var(--accent); }
 .theme-menu i { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--c1) 50%, var(--c2) 50%); border: 1px solid var(--border); }
 
-.burger { display: none; flex-direction: column; gap: 4px; }
+.burger { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
 .burger span { width: 18px; height: 2px; background: currentColor; border-radius: 2px; transition: .3s; }
 
 /* =====================================================================
@@ -385,7 +385,9 @@ html[data-scheme="light"] .glitch::before, html[data-scheme="light"] .glitch::af
 body.chat-open .chat-fab { transform: scale(0); }
 
 .chat {
-  position: fixed; right: 24px; bottom: 24px; z-index: 70; width: min(400px, calc(100vw - 24px)); height: min(620px, calc(100vh - 48px));
+  position: fixed; right: 24px; bottom: 24px; z-index: 70; width: min(400px, calc(100vw - 24px));
+  height: min(620px, calc(100vh - 48px));
+  height: min(620px, calc(100dvh - 48px));   /* dvh = visible height, excludes the mobile address bar */
   display: flex; flex-direction: column; border-radius: 24px; overflow: hidden;
   background: color-mix(in srgb, var(--bg1) 82%, transparent); border: 1px solid var(--border);
   backdrop-filter: blur(20px) saturate(1.4); -webkit-backdrop-filter: blur(20px) saturate(1.4);
@@ -477,7 +479,8 @@ body.chat-open .chat-fab { transform: scale(0); }
   .burger { display: flex; }
   .nav-links {
     position: absolute; top: calc(100% + 10px); left: 0; right: 0; flex-direction: column; padding: 10px;
-    background: var(--card); border: 1px solid var(--border); border-radius: 20px; backdrop-filter: blur(18px);
+    background: color-mix(in srgb, var(--bg1) 96%, var(--accent)); border: 1px solid var(--border); border-radius: 20px;
+    box-shadow: 0 16px 40px rgba(0,0,0,.18);
     opacity: 0; transform: translateY(-10px); pointer-events: none; transition: .3s var(--ease);
   }
   .nav-links.open { opacity: 1; transform: none; pointer-events: auto; }
@@ -485,8 +488,32 @@ body.chat-open .chat-fab { transform: scale(0); }
   .speech-bubble { right: -10px; }
 }
 @media (max-width: 520px) {
-  .chat { right: 12px; bottom: 12px; height: calc(100vh - 24px); }
+  /* Menu bar: even spacing, everything vertically centred */
+  .nav { top: 10px; width: calc(100% - 20px); padding: 6px 8px 6px 16px; gap: 8px; }
+  .logo-en { font-size: 23px; }
   .logo-jp { display: none; }
+  .nav-actions { gap: 2px; }
+  .icon-btn { width: 38px; height: 38px; }
+  .theme-menu { right: -44px; }
+
+  /* Chat: pinned inside the visible screen with a margin on every side,
+     so it never slides under the browser's address bar or home indicator */
+  .chat {
+    top: calc(10px + env(safe-area-inset-top));
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    left: 10px; right: 10px;
+    width: auto; height: auto; max-height: none;
+    border-radius: 20px;
+  }
+  .chat-head { padding: 10px 10px 10px 14px; gap: 10px; }
+  .voice-stage { padding: 16px 12px 8px; }
+  .orb { width: 86px; height: 86px; }
+}
+/* Short screens (phones in landscape): keep the chat inside the screen too */
+@media (max-height: 560px) {
+  .chat { top: 10px; bottom: 10px; height: auto; }
+  .voice-stage { padding: 10px; }
+  .orb { width: 64px; height: 64px; margin-bottom: 6px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
